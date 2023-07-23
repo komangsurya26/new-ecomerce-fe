@@ -15,6 +15,9 @@ const Title = styled.h2`
   font-weight: normal;
   margin: 0;
   font-size: 2rem
+  @media screen and (min-width: 768px) {
+    font-size:3rem;
+  }
 `;
 
 const Desc = styled.p`
@@ -24,44 +27,58 @@ const Desc = styled.p`
 
 const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  img {
+  grid-template-columns: 1fr;
+  gap: 40px;
+  img{
     max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+  div:nth-child(1) {
+    order: 2;
+  }
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.1fr 0.9fr;
+    div:nth-child(1) {
+      order: 0;
+    }
+    img{
+      max-width: 100%;
+    }
   }
 `;
 
 const Column = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 25px;
   
 `;
 
-export default function Featured({product}) {
+const ButtonWrapper = styled.div`
+display: flex;
+gap:10px;
+margin-top:25px;
+`;
+
+export default function Featured({products}) {
   const {addProduct} = useContext(CartContex)
-  function featuredAddToCart() {
-    addProduct(prev => [...prev, product._id])
-  }
+ 
   return (
     <Bg>
       <Center>
         <ColumnWrapper>
           <Column>
             <div>
-              <Title>{product.title} 👉</Title>
+              <Title>{products.title} 👉</Title>
               <Desc>
-                {product.description}
+                {products.description}
               </Desc>
               <ButtonWrapper >
-                <ButtonLink href={'/product/'+ product._id} outline={1} white={1} size="l">
+                <ButtonLink href={'/product/'+ products._id} outline={1} white={1} size="l">
                   📚 Selengkapnya
                 </ButtonLink>
-                <Button onClick={featuredAddToCart} primary size="l">
+                <Button onClick={() => addProduct(products._id)} primary size="l">
                   <CartIcon></CartIcon>
                   Tambahkan
                 </Button>

@@ -7,7 +7,7 @@ export default async function Handle(req, res) {
   if (req.method !== "POST") {
     return res.json("should be a POST REQUEST");
   }
-  const { name, email, address, regecy, province, postalCode, cartProducts } = req.body;
+  const { name, email, address, regency, province, postalCode, cartProducts } = req.body;
   await mongooseConnect();
   const productIds = cartProducts
   const uniqueIds = [...new Set(productIds)];
@@ -33,7 +33,7 @@ export default async function Handle(req, res) {
     name,
     email,
     address,
-    regecy,
+    regency,
     province,
     postalCode,
     paid: false
@@ -46,7 +46,7 @@ export default async function Handle(req, res) {
     customer_email: email,
     success_url: process.env.PUBLIC_URL + '/cart?success',
     cancel_url: process.env.PUBLIC_URL + '/cart?canceled',
-    metadata:{orderId: orderDoc._id.toString()}
+    metadata:{orderId: orderDoc._id.toString(),test:'ok'}
   })
 
   res.json({

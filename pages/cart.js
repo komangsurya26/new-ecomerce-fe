@@ -9,13 +9,17 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const ColumnssWrapper = styled.div`
-  display: grid;
-  gap: 40px;
-  grid-template-columns: 1.2fr 0.9fr;
-  margin-top: 40px;
+display: grid;
+grid-template-columns: 1fr;
+@media screen and (min-width: 768px) {
+  grid-template-columns: 1.2fr .8fr;
+}
+gap: 40px;
+margin-top: 40px;
 `;
 
 const Box = styled.div`
+
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
@@ -39,10 +43,24 @@ const ProductImageBox = styled.div`
     max-width: 80px;
     max-height: 80px;
   }
+  @media screen and (min-width: 768px) {
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    img{
+      max-width: 80px;
+      max-height: 80px;
+    }
+  }
 `;
 
 const QuantityLabel = styled.span`
-  padding: 0 3px;
+  padding: 0 5px;
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    padding: 0 10px;
+  }
 `;
 
 const ProvinsiHolder = styled.div`
@@ -65,7 +83,7 @@ export default function CartPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [regency, setKabupaten] = useState("");
+  const [regency, setRegency] = useState("");
   const [province, setProvinsi] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [isSuccess,setIsSuccess] = useState(false);
@@ -227,7 +245,7 @@ export default function CartPage() {
                 <Input
                   name="regency"
                   value={regency}
-                  onChange={(ev) => setKabupaten(ev.target.value)}
+                  onChange={(ev) => setRegency(ev.target.value)}
                   type="text"
                   placeholder="Kabupaten"
                 />

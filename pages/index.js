@@ -7,14 +7,14 @@ import { Product } from "@/models/Product";
 export default function HomePage({ featuredProduct, newProduct }) {
   return (
     <div>
-      <Header></Header>
-      <Featured product={featuredProduct}></Featured>
-      <NewProducts product={newProduct}></NewProducts>
+      <Header />
+      <Featured products ={featuredProduct}></Featured>
+      <NewProducts products ={newProduct}></NewProducts>
     </div>
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const featuredProductId = "64b01a93384bf3af805403c8";
   await mongooseConnect();
   const featuredProduct = await Product.findById(featuredProductId);
